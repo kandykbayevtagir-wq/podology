@@ -11,7 +11,36 @@
     "googleVerification": "",
     "turnstileSiteKey": "",
     "bookingMode": "whatsapp",
-    "paymentMethods": []
+    "paymentMethods": [
+      {
+        "id": "cash",
+        "confirmed": true
+      },
+      {
+        "id": "kaspi",
+        "confirmed": true
+      },
+      {
+        "id": "halyk",
+        "confirmed": true
+      },
+      {
+        "id": "bank-cards",
+        "confirmed": true
+      },
+      {
+        "id": "apple-pay",
+        "confirmed": true
+      },
+      {
+        "id": "google-pay",
+        "confirmed": true
+      },
+      {
+        "id": "samsung-pay",
+        "confirmed": true
+      }
+    ]
   },
   "services": [
     {
@@ -26,7 +55,7 @@
         "kk": "Аяқ терісі мен тырнақтың жағдайына сай күтім."
       },
       "published": false,
-      "image": "/assets/care.svg",
+      "image": "/assets/photos/training.webp",
       "concerns": {
         "ru": [
           "Дискомфорт и изменения в области стоп или ногтей.",
@@ -70,7 +99,7 @@
         "kk": "Тырнақ маңындағы жайсыздық кезінде подологтың қабылдауы."
       },
       "published": true,
-      "image": "/assets/care.svg",
+      "image": "/assets/photos/correction.webp",
       "concerns": {
         "ru": [
           "Дискомфорт и изменения в области стоп или ногтей.",
@@ -114,7 +143,7 @@
         "kk": "Тексеруден кейін тырнақты түзету тәсілін таңдау."
       },
       "published": true,
-      "image": "/assets/care.svg",
+      "image": "/assets/photos/correction.webp",
       "concerns": {
         "ru": [
           "Дискомфорт и изменения в области стоп или ногтей.",
@@ -158,7 +187,7 @@
         "kk": "Тырнақ пішіні, қалыңдығы немесе құрылымы өзгергендегі күтім."
       },
       "published": false,
-      "image": "/assets/care.svg",
+      "image": "/assets/photos/training.webp",
       "concerns": {
         "ru": [
           "Дискомфорт и изменения в области стоп или ногтей.",
@@ -202,7 +231,7 @@
         "kk": "Аяқтың қалыңдаған терісіне подологиялық күтім."
       },
       "published": false,
-      "image": "/assets/care.svg",
+      "image": "/assets/photos/training.webp",
       "concerns": {
         "ru": [
           "Дискомфорт и изменения в области стоп или ногтей.",
@@ -246,7 +275,7 @@
         "kk": "Артық қысым түсетін аймақтарды бағалау және күтім таңдау."
       },
       "published": false,
-      "image": "/assets/care.svg",
+      "image": "/assets/photos/training.webp",
       "concerns": {
         "ru": [
           "Дискомфорт и изменения в области стоп или ногтей.",
@@ -290,7 +319,7 @@
         "kk": "Күтім мүмкіндігі мен шектеулері жеке анықталады."
       },
       "published": false,
-      "image": "/assets/care.svg",
+      "image": "/assets/photos/training.webp",
       "concerns": {
         "ru": [
           "Дискомфорт и изменения в области стоп или ногтей.",
@@ -334,7 +363,7 @@
         "kk": "Қызметтің қолжетімділігі мен шарттары нақтыланады."
       },
       "published": false,
-      "image": "/assets/care.svg",
+      "image": "/assets/photos/training.webp",
       "concerns": {
         "ru": [
           "Дискомфорт и изменения в области стоп или ногтей.",
@@ -378,7 +407,7 @@
         "kk": "Аяқ ерекшеліктері мен жүктеменің таралуын бағалау."
       },
       "published": false,
-      "image": "/assets/care.svg",
+      "image": "/assets/photos/training.webp",
       "concerns": {
         "ru": [
           "Дискомфорт и изменения в области стоп или ногтей.",
@@ -422,7 +451,7 @@
         "kk": "Жеке ұлтарақтарды таңдау кезеңдерін талқылау."
       },
       "published": true,
-      "image": "/assets/care.svg",
+      "image": "/assets/photos/insoles.webp",
       "concerns": {
         "ru": [
           "Дискомфорт и изменения в области стоп или ногтей.",
@@ -466,7 +495,7 @@
         "kk": "Үйге бару мүмкіндігі, аудан және шарттар алдын ала келісіледі."
       },
       "published": false,
-      "image": "/assets/care.svg",
+      "image": "/assets/photos/training.webp",
       "concerns": {
         "ru": [
           "Дискомфорт и изменения в области стоп или ногтей.",
@@ -531,7 +560,7 @@
         ]
       },
       "published": true,
-      "image": "/assets/education.svg",
+      "image": "/assets/photos/training.webp",
       "duration": {
         "ru": "Уточняется при записи",
         "kk": "Тіркелу кезінде нақтыланады"
@@ -581,7 +610,7 @@
         ]
       },
       "published": true,
-      "image": "/assets/education-insoles.svg",
+      "image": "/assets/photos/insoles.webp",
       "duration": {
         "ru": "Уточняется при записи",
         "kk": "Тіркелу кезінде нақтыланады"
@@ -631,7 +660,7 @@
         ]
       },
       "published": true,
-      "image": "/assets/education-correction.svg",
+      "image": "/assets/photos/correction.webp",
       "duration": {
         "ru": "Уточняется при записи",
         "kk": "Тіркелу кезінде нақтыланады"
@@ -681,7 +710,7 @@
         ]
       },
       "published": true,
-      "image": "/assets/education-prosthetics.svg",
+      "image": "/assets/photos/correction.webp",
       "duration": {
         "ru": "Уточняется при записи",
         "kk": "Тіркелу кезінде нақтыланады"
@@ -731,7 +760,7 @@
         ]
       },
       "published": true,
-      "image": "/assets/education-orthoses.svg",
+      "image": "/assets/photos/orthoses.webp",
       "duration": {
         "ru": "Уточняется при записи",
         "kk": "Тіркелу кезінде нақтыланады"
@@ -781,7 +810,7 @@
         ]
       },
       "published": true,
-      "image": "/assets/education-titanium.svg",
+      "image": "/assets/photos/correction.webp",
       "duration": {
         "ru": "Уточняется при записи",
         "kk": "Тіркелу кезінде нақтыланады"
@@ -831,7 +860,7 @@
         ]
       },
       "published": true,
-      "image": "/assets/education.svg",
+      "image": "/assets/photos/training.webp",
       "duration": {
         "ru": "Уточняется при записи",
         "kk": "Тіркелу кезінде нақтыланады"
