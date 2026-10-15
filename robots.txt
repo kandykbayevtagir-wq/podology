@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+Sitemap: https://kandykbayevtagir-wq.github.io/podology/sitemap.xml
