@@ -1,0 +1,22 @@
+import {readFile,writeFile,mkdir,rm,cp} from 'node:fs/promises';
+import {dirname,resolve} from 'node:path';
+import {render,routes,validate,esc} from '../src/render.mjs';
+const root=resolve(import.meta.dirname,'..');
+const d=validate(JSON.parse(await readFile(root+'/content/site.json','utf8')));
+const base=(process.env.BASE_PATH||'').replace(/\/$/,'');
+if(process.env.SITE_ORIGIN)d.settings.origin=process.env.SITE_ORIGIN.replace(/\/$/,'');
+const dist=root+'/dist';await rm(dist,{recursive:true,force:true});await mkdir(dist,{recursive:true});await cp(root+'/public',dist,{recursive:true});
+const list=routes(d);
+for(const path of list){const file=dist+path+'/index.html';await mkdir(dirname(file),{recursive:true});await writeFile(file,render(d,path,{base}).html);}
+await writeFile(dist+'/.nojekyll','');
+await writeFile(dist+'/404.html',render(d,'/ru/404',{base}).html);
+await writeFile(dist+'/index.html',`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=${base}/ru"><title>Podology MK | Марина Кандыкбаева</title></head><body><a href="${base}/ru">Русский</a> · <a href="${base}/kk">Қазақша</a></body></html>`);
+const canonicalOrigin=d.settings.origin+base;
+await writeFile(dist+'/sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">'+list.map(path=>`<url><loc>${esc(canonicalOrigin+path)}</loc>${['ru','kk'].map(l=>`<xhtml:link rel="alternate" hreflang="${l}-KZ" href="${esc(canonicalOrigin+path.replace(/^\/(ru|kk)/,'/'+l))}"/>`).join('')}</url>`).join('')+'</urlset>');
+await writeFile(dist+'/robots.txt',`User-agent: *\n${d.settings.indexable?'Allow: /\nDisallow: /admin\nDisallow: /api/':'Disallow: /'}\nSitemap: ${canonicalOrigin}/sitemap.xml\n`);
+await writeFile(dist+'/_redirects','/ /ru 301\n/ru/ /ru 301\n/kk/ /kk 301\n/admin/ /admin 301\n');
+await writeFile(dist+'/_headers','/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: DENY\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n/assets/*\n  Cache-Control: public, max-age=3600\n/admin*\n  X-Robots-Tag: noindex, nofollow\n');
+const admin=await readFile(dist+'/admin/index.html','utf8');await writeFile(dist+'/admin/index.html',admin.replaceAll('__BASE__',base));
+await writeFile(dist+'/assets/content.json',JSON.stringify(d));
+await writeFile(dist+'/build-info.json',JSON.stringify({builtAt:new Date().toISOString(),pages:list.length,mode:'static',base}));
+console.log(`Built ${list.length} localized pages, sitemap, robots and admin → ${dist}`);

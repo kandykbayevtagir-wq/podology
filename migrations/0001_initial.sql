@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS content (id TEXT PRIMARY KEY CHECK (id = 'site'), body TEXT NOT NULL, version INTEGER NOT NULL DEFAULT 1, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS leads (id TEXT PRIMARY KEY, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, name TEXT NOT NULL, phone TEXT NOT NULL, service_id TEXT, course_id TEXT, specialist_id TEXT, location_id TEXT NOT NULL, topic TEXT, comment TEXT, page_source TEXT, attribution TEXT, consent_version TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'new');
+CREATE INDEX IF NOT EXISTS leads_created_at ON leads(created_at);
+CREATE TABLE IF NOT EXISTS rate_limits (key TEXT PRIMARY KEY, window_start INTEGER NOT NULL, count INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS redirects (source TEXT PRIMARY KEY, destination TEXT NOT NULL, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);

@@ -1,0 +1,15 @@
+{
+  "name": "podology-mk-platform",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "dev:cloudflare": "npx wrangler dev",
+    "deploy:cloudflare": "npm run build && npx wrangler deploy"
+  },
+  "engines": {"node": ">=22"},
+  "devDependencies": {"wrangler": "^4.45.0"}
+}
