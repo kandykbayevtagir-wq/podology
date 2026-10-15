@@ -1,0 +1,10 @@
+{
+  "dimensions": [
+    516,
+    552
+  ],
+  "meanChannelDifference": 0.00013926337864659402,
+  "normalizedRMSE": 0.00004627839442760837,
+  "maxChannelDifference": 1,
+  "channelsWithin8": 1
+}

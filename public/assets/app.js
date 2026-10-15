@@ -1,4 +1,8 @@
 (()=>{'use strict';
+// Discourage ordinary image saving without blocking text, links or browser shortcuts.
+const protectedMedia='img,svg,canvas,.hero-visual,.course-image,.placeholder,.payment-methods li:has(img)';
+for(const type of ['contextmenu','dragstart'])document.addEventListener(type,event=>{if(event.target instanceof Element&&event.target.closest(protectedMedia))event.preventDefault();});
+document.querySelectorAll('img').forEach(image=>{image.draggable=false;});
 const cfg=JSON.parse(document.getElementById('site-config')?.textContent||'{}');const kk=cfg.lang==='kk';const say=(ru,kz)=>kk?kz:ru;
 const menu=document.querySelector('.menu-toggle'),nav=document.getElementById('mobile-nav');
 function toggleMenu(open,restore=false){if(!menu||!nav)return;menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?menu.dataset.labelClose:menu.dataset.labelOpen);nav.hidden=!open;document.body.classList.toggle('menu-open',open);for(const el of document.querySelectorAll('main,footer,.mobile-actions'))el.inert=open;if(restore)menu.focus();}

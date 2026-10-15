@@ -1,0 +1,24 @@
+[
+  {
+    "mobile": false,
+    "duration": 2541,
+    "draws": 25,
+    "callbacks": 25,
+    "DOMAttributeWrites": 0,
+    "canvas": [
+      516,
+      552
+    ]
+  },
+  {
+    "mobile": true,
+    "duration": 2506,
+    "draws": 55,
+    "callbacks": 55,
+    "DOMAttributeWrites": 0,
+    "canvas": [
+      312,
+      340
+    ]
+  }
+]
