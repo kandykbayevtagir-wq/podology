@@ -1,6 +1,14 @@
 (()=>{'use strict';
 const cfg=JSON.parse(document.getElementById('site-config')?.textContent||'{}');const kk=cfg.lang==='kk';const say=(ru,kz)=>kk?kz:ru;
-const menu=document.querySelector('.menu-toggle'),nav=document.getElementById('mobile-nav');menu?.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.hidden=!open;document.body.classList.toggle('menu-open',open);});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu){nav.hidden=true;menu.setAttribute('aria-expanded','false');document.body.classList.remove('menu-open');menu.focus();}});
+const menu=document.querySelector('.menu-toggle'),nav=document.getElementById('mobile-nav');
+function toggleMenu(open,restore=false){if(!menu||!nav)return;menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?menu.dataset.labelClose:menu.dataset.labelOpen);nav.hidden=!open;document.body.classList.toggle('menu-open',open);for(const el of document.querySelectorAll('main,footer,.mobile-actions'))el.inert=open;if(restore)menu.focus();}
+menu?.addEventListener('click',()=>toggleMenu(menu.getAttribute('aria-expanded')!=='true'));
+nav?.addEventListener('click',e=>{if(e.target.closest('a'))toggleMenu(false);});
+document.addEventListener('keydown',e=>{if(menu?.getAttribute('aria-expanded')!=='true')return;if(e.key==='Escape'){toggleMenu(false,true);return;}if(e.key==='Tab'){const links=[...document.querySelectorAll('.header-actions a,.menu-toggle,#mobile-nav a')].filter(x=>x.getClientRects().length),first=links[0],last=links.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+matchMedia('(min-width: 981px)').addEventListener('change',e=>{if(e.matches)toggleMenu(false);});
+window.addEventListener('pagehide',()=>toggleMenu(false));
+document.addEventListener('focusin',e=>{if(e.target.matches('input:not([type=checkbox]),textarea,select'))document.body.classList.add('is-editing');});
+document.addEventListener('focusout',()=>{setTimeout(()=>document.body.classList.toggle('is-editing',!!document.activeElement?.matches('input:not([type=checkbox]),textarea,select')),0);});
 document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b));});document.querySelectorAll('.course-card[data-category]').forEach(c=>c.hidden=b.dataset.filter!=='all'&&c.dataset.category!==b.dataset.filter);history.replaceState(null,'',location.pathname); }));
 let consent='';try{consent=localStorage.getItem('mk-analytics')||'';}catch{}let loaded=false;
 window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};
