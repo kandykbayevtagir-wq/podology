@@ -1,41 +1,70 @@
-name: Build and deploy GitHub Pages
+name: Validate and publish website
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
-  pages: write
-  id-token: write
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: website-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   build:
+    name: Tests and production build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24
       - run: npm test
-      - name: Build
+      - name: Build existing static website
         run: npm run build
         env:
           BASE_PATH: /${{ github.event.repository.name }}
           SITE_ORIGIN: https://${{ github.repository_owner }}.github.io
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
+          name: github-pages-static
           path: dist
-  deploy:
+          include-hidden-files: true
+  publish:
+    name: Update configured gh-pages branch
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: write
+      pages: write
     steps:
-      - uses: actions/configure-pages@v5
+      - uses: actions/checkout@v4
         with:
-          enablement: true
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          name: github-pages-static
+          path: dist
+      - name: Publish to the existing Pages source
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          pages_checkout="$RUNNER_TEMP/podology-pages"
+          git worktree add --detach "$pages_checkout" origin/gh-pages
+          git -C "$pages_checkout" rm -r --ignore-unmatch .
+          cp -a dist/. "$pages_checkout/"
+          git -C "$pages_checkout" add --all
+          if ! git -C "$pages_checkout" diff --cached --quiet; then
+            git -C "$pages_checkout" commit -m "Publish website from ${GITHUB_SHA::7}"
+            git -C "$pages_checkout" push origin HEAD:gh-pages
+          fi
+          # Pushes made by GITHUB_TOKEN do not trigger a branch Pages build.
+          # Request the existing branch deployment explicitly; do not change Pages settings.
+          gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds" --jq .status

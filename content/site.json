@@ -10,7 +10,8 @@
     "adsWhatsappLabel": "",
     "googleVerification": "",
     "turnstileSiteKey": "",
-    "bookingMode": "whatsapp"
+    "bookingMode": "whatsapp",
+    "paymentMethods": []
   },
   "services": [
     {
@@ -580,7 +581,7 @@
         ]
       },
       "published": true,
-      "image": "/assets/education.svg",
+      "image": "/assets/education-insoles.svg",
       "duration": {
         "ru": "Уточняется при записи",
         "kk": "Тіркелу кезінде нақтыланады"
@@ -630,7 +631,7 @@
         ]
       },
       "published": true,
-      "image": "/assets/education.svg",
+      "image": "/assets/education-correction.svg",
       "duration": {
         "ru": "Уточняется при записи",
         "kk": "Тіркелу кезінде нақтыланады"
@@ -680,7 +681,7 @@
         ]
       },
       "published": true,
-      "image": "/assets/education.svg",
+      "image": "/assets/education-prosthetics.svg",
       "duration": {
         "ru": "Уточняется при записи",
         "kk": "Тіркелу кезінде нақтыланады"
@@ -730,7 +731,7 @@
         ]
       },
       "published": true,
-      "image": "/assets/education.svg",
+      "image": "/assets/education-orthoses.svg",
       "duration": {
         "ru": "Уточняется при записи",
         "kk": "Тіркелу кезінде нақтыланады"
@@ -780,7 +781,7 @@
         ]
       },
       "published": true,
-      "image": "/assets/education.svg",
+      "image": "/assets/education-titanium.svg",
       "duration": {
         "ru": "Уточняется при записи",
         "kk": "Тіркелу кезінде нақтыланады"
@@ -905,8 +906,8 @@
         "kk": "Подолог · оқытушы · Podology MK жетекшісі"
       },
       "bio": {
-        "ru": "Подологическая практика и профессиональное обучение в единой системе Podology MK. Подробная биография, подтверждённое образование и опыт будут добавлены после согласования.",
-        "kk": "Podology MK аясындағы подологиялық тәжірибе мен кәсіби оқыту. Толық өмірбаян, расталған білім мен тәжірибе келісілгеннен кейін қосылады."
+        "ru": "Подолог, преподаватель и руководитель Podology MK в Актобе. Ведёт приём и профессиональные обучающие программы.",
+        "kk": "Ақтөбедегі Podology MK орталығының подологы, оқытушысы және жетекшісі. Қабылдау жүргізеді және кәсіби оқу бағдарламаларын оқытады."
       },
       "image": "/assets/portrait.svg",
       "published": true,
